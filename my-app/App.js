@@ -1,11 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View, FlatList } from 'react-native';
+import Login from './src/componentes/Login/Login';
 
 export default function App() {
+
+  //Este array dsps hay que cambiarlo a la api pero x ahora uso este
+  const users = [
+    {name: 'Benjamin', id: 1},
+    {name: 'Toto', id: 2},
+    {name: 'Juanchi', id: 3}
+  ]
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Login/>
+
+      <Image style={styles.image} source={require('./assets/EscudoCasla.png')} resizeMode='cover'/>
+
+      <FlatList data={users} keyExtractor={(user) => user.id.toString()} renderItem={({item}) => <Text>{item.name}</Text>}/> 
+
     </View>
   );
 }
@@ -17,4 +30,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  image: {
+    height: 200,
+    width: 200,
+    borderRadius: 15,
+  }
 });
