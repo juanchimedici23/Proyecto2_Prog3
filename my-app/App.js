@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, FlatList } from 'react-native';
 import Login from './src/componentes/Login/Login';
+import Register from './src/componentes/Register/Register'
 
 export default function App() {
 
@@ -17,7 +18,9 @@ export default function App() {
 
       <Image style={styles.image} source={require('./assets/EscudoCasla.png')} resizeMode='cover'/>
 
-      <FlatList data={users} keyExtractor={(user) => user.id.toString()} renderItem={({item}) => <Text>{item.name}</Text>}/> 
+      <FlatList data={users} keyExtractor={(user) => user.id.toString()} renderItem={({item}) => <Text>{item.name}</Text>}/>
+
+      <Register/> 
 
     </View>
   );
