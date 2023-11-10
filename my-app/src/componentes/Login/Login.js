@@ -20,31 +20,31 @@ class Login extends Component {
 
     render(){
         return(
-            <View style={styles.container}>
+            <View style={styles.login}>
                 <Text>Login</Text>
                 <TextInput
-                    style = {styles.container}
+                    style = {styles.text}
                     onChangeText={(text)=>this.setState({mail:text})}
                     placeholder='mail'
                     keyboardType='tu mail'
                     value={this.state.mail}
                     />
                 <TextInput
-                    style = {styles.container}
+                    style = {styles.text}
                     onChangeText={(text)=>this.setState({contrasena:text})}
                     placeholder='contrasena'
                     keyboardType='tu contrasena'
                     value={this.state.contrasena}
                     />
-                <TouchableOpacity style={styles.text} onPress={() => this.login(this.state.mail, this.state.contrasena)}>
+                <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.mail, this.state.contrasena)}>
                     <Text style={styles.button}>Loguearse</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.text} onPress={() => this.props.navigation.navigate('Register')}>
+                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Register')}>
                     <Text style={styles.button}>Crear un usuario</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.text} onPress={() => this.props.navigation.navigate('Home')}>
+                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Home')}>
                     <Text style={styles.button}>Home</Text>
                 </TouchableOpacity>
 
@@ -55,22 +55,30 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor : 'black',
-        padding: 10,
-        backgroundColor : 'grey',
+    login:{
+        paddingHorizontal:10,
+        marginTop: 20,
     },
-    text: {
-        color: 'red',
-        padding: 10,
-        borderRadius: 10,
+    text:{
+        height:20,
+        paddingVertical:16,
+        paddingHorizontal: 12,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 5,
+        marginVertical:15,
     },
-    button: {
-        color: 'white',
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor : 'green',
-    }
+    button:{
+        backgroundColor:'#28a745',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:5, 
+        borderWidth:2,
+        borderStyle: 'solid',
+        borderColor: '#28a745',
+    },
  
 })
 
