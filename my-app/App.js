@@ -2,8 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, FlatList } from 'react-native';
 import Login from './src/componentes/Login/Login';
 import Register from './src/componentes/Register/Register'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { auth } from './src/firebase/config';
+import Home from './src/componentes/Home/Home'
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
 
   //Este array dsps hay que cambiarlo a la api pero x ahora uso este
   const users = [
@@ -13,16 +18,14 @@ export default function App() {
   ]
 
   return (
-    <View style={styles.container}>
-      <Login/>
-
-      <Image style={styles.image} source={require('./assets/EscudoCasla.png')} resizeMode='cover'/>
-
-      <FlatList data={users} keyExtractor={(user) => user.id.toString()} renderItem={({item}) => <Text>{item.name}</Text>}/>
-
-      <Register/> 
-
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='Login' component={Login} options={{headerShown: false}}/>
+        <Stack.Screen name='Register' component={Register} options={{headerShown: false}}/>
+        <Stack.Screen name='Home' component={Home} options={{headerShown: false}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+    
   );
 }
 
