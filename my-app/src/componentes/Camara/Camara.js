@@ -41,14 +41,20 @@ class MyCamera extends Component {
 
     guardarLaFotoEnStorage(){
         fetch(this.state.urlInternaFoto)
-            .then( res => res.blob()) //es el metodo para recuperar binarios. Seria JSON para fotos
+            .then( res => res.blob()) //es el metodo para recuperar binarios. Seria JSON para fotos y lo guardo en el segundo then con el parametro image
             .then( image => {
-                const rutaFoto = storage.ref(`photos/${Date.now()}.jpg`); // Le pedimos que guarde en una carpeta photos que si no la tiene la va a crear y dsps le digo creame un nombre en base a la fecha de creacion de la foto. Crea la ruta
-                rutaFoto.put( image )
+                const rutaFoto = storage.ref(`photos/${Date.now()}.jpg`); // Le pedimos que guarde la foto en una carpeta photos que si no la tiene la va a crear y dsps le digo creame un nombre en base a la fecha de creacion de la foto. Crea la ruta
+                rutaFoto.put( image ) //Lo que nos retorno el metodo .ref() despues le aplicamos el metodo .put() que tiene un then para poder buscar la url de la foto en internet 
                     .then(()=>{
-                        rutaFoto.getDownloadURL()
+                        rutaFoto.getDownloadURL() //con este metodo capturamos esta url de la foto para tenerla en la mano y poder usarla
                             .then(url=>{
-                                
+                                //Ahora queremos guardar la url de la foto como un dato mas del posteo
+                                this.props.traerLaUrlDeLaFoto(url)
+
+                                //Borramos la url temporal del estado
+                                this.setState({
+                                    urlInternaFoto: '',
+                                })
                             })
                     })
             })
@@ -64,12 +70,21 @@ class MyCamera extends Component {
             this.state.permisos ?
                 
                 this.state.mostrarLaCamara === false ?
-                //mostrar la imagen
-                <Image 
+                //Es la preview de la foto
+                <React.Fragment>
+                    <Image 
                     source = { {uri: this.state.urlInternaFoto} }
                     style = {''}
-                />
+                    />
+                    <TouchableOpacity onPress={()=> this.guardarLaFotoEnStorage}>
+                        Aceptar
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=> ''}>
+                        Cancelar
+                    </TouchableOpacity>
+                </React.Fragment>
                 :
+                //Es la camara
                     <React.Fragment>
                         <Camera
                         //style={}
