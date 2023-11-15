@@ -11,7 +11,13 @@ class Login extends Component {
             contrasena: '',
         }
     }
-
+    componentDidMount(){
+        auth.onAuthStateChanged(user => {
+            if(user){
+                this.props.navigation.navigate('Home')
+            } 
+        })
+    }
     login(mail, pass){
         auth.signInWithEmailAndPassword(mail, pass)
         .then(()=>{console.log('Te logueaste con exito');})

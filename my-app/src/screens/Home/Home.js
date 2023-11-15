@@ -19,7 +19,9 @@ class Home extends Component {
     render(){
         return(
             <View>
-                <Text> Home </Text>
+                <TouchableOpacity onPressOut={()=>this.props.navigation.navigate('Home')}>
+                    <Text> Home </Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPressOut={()=>this.props.navigation.navigate('Perfil')}>
                     <Text> Perfil </Text>
                 </TouchableOpacity>

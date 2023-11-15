@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View, Text} from 'react-native'
 
 
 class Perfil extends Component {
@@ -11,7 +11,7 @@ class Perfil extends Component {
     render() {
         return (
             <View>
-                <Text> Bienvendio a tu Perfil!</Text>
+                <Text> Bienvendio a tu Perfil! </Text>
                 <TouchableOpacity onPressOut={() => this.props.navigation.navigate('Home')}>
                     <Text> Volver al Home </Text>
                 </TouchableOpacity>
