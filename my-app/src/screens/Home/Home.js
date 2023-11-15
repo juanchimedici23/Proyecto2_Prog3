@@ -1,6 +1,7 @@
 import react, { Component } from 'react';
 import { auth, db} from '../../firebase/config';
 import { TouchableOpacity, Text, TextInput, View, StyleSheet } from 'react-native';
+import FormularioPost from '../../componentes/PostForm/PostForm';
 
 class Home extends Component {
     constructor(){
@@ -28,7 +29,7 @@ class Home extends Component {
                 <TouchableOpacity onPressOut={()=>this.logout()}>
                     <Text> Logout </Text>
                 </TouchableOpacity>
-
+                <FormularioPost/>
                 
             </View>
         )
