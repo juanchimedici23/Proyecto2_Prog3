@@ -10,6 +10,7 @@ class MyCamera extends Component {
             permisoDeHardware: false,
             urlInternaFoto: '',
             mostrarLaCamara: true, //esto nos sirve para saber si mostramos la camara o si mostramos la preview de la foto
+            fotoUrl: ''
         }
 
         this.metodosDeCamera = ''
@@ -38,6 +39,11 @@ class MyCamera extends Component {
             })
             .catch(error => console.log(error))
     }
+    traerLaUrlDeLaFoto(url){
+        this.state({
+            fotoUrl: url
+        })
+    }
 
     guardarLaFotoEnStorage(){
         fetch(this.state.urlInternaFoto)
@@ -61,6 +67,16 @@ class MyCamera extends Component {
             .catch(error => console.log(error))
     }
 
+    cancelarStorage(){
+        console.log("cancelando...");
+        this.setState({
+            urlInternaFoto:'',
+            mostrarLaCamara:true
+        })
+    }
+
+    
+
     render(){
         // elreturn tiene que mostrar la camara o sino mostrar el preview de la foto con las opciones de cancelar o confirmar
         return(
@@ -73,13 +89,13 @@ class MyCamera extends Component {
                 //Es la preview de la foto
                 <React.Fragment>
                     <Image 
-                    source = { {uri: this.state.urlInternaFoto} }
-                    style = {''}
+                        source = { {uri: this.state.urlInternaFoto} }
+                        style = {''}
                     />
-                    <TouchableOpacity onPress={()=> this.guardarLaFotoEnStorage}>
+                    <TouchableOpacity onPress={()=> this.guardarLaFotoEnStorage()}>
                         Aceptar
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={()=> ''}>
+                    </TouchableOpacity>     
+                    <TouchableOpacity onPress={()=> this.cancelarStorage()}>
                         Cancelar
                     </TouchableOpacity>
                 </React.Fragment>
