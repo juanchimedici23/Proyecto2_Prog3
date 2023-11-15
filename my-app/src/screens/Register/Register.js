@@ -9,6 +9,9 @@ class Register extends Component {
             mail: '',
             usuario: '',
             contrasena: '',
+            bio: '',
+            foto_perfil: '',
+            error: '',
         }
     }
 
@@ -19,17 +22,20 @@ class Register extends Component {
             }
         })
     }
-    register(mail, pass, userName) {
+    register(mail, pass, userName, biografia) {
         auth.createUserWithEmailAndPassword(mail, pass)
             .then(res => {
                 console.log('Correctamente registrado', res);
 
                 db.collection('users').add({
                     mail: auth.currentUser.email,
+                    username:userName,
+                    bio:biografia,
                     createdAt: Date.now(),
                 })
                 .catch((e) => {
                         console.error(e);
+                        
                 });
             })
     }
@@ -41,25 +47,34 @@ class Register extends Component {
                 <TextInput
                     style={styles.text}
                     onChangeText={(text) => this.setState({ mail: text })}
-                    placeholder='mail'
+                    placeholder='Mail'
                     keyboardType='tu mail'
                     value={this.state.mail}
                 />
                 <TextInput
                     style={styles.text}
                     onChangeText={(text) => this.setState({ usuario: text })}
-                    placeholder='usuario'
+                    placeholder='User'
                     keyboardType='tu usuario'
                     value={this.state.usuario}
                 />
                 <TextInput
                     style={styles.text}
                     onChangeText={(text) => this.setState({ contrasena: text })}
-                    placeholder='contrasena'
+                    placeholder='Password'
                     keyboardType='tu contrasena'
                     value={this.state.contrasena}
                 />
-                <TouchableOpacity style={styles.button} onPress={() => this.register(this.state.mail, this.state.contrasena)}>
+                <TextInput
+                    style={styles.text}
+                    onChangeText={(text) => this.setState({ bio: text })}
+                    placeholder='Bio'
+                    keyboardType='tu bio'
+                    value={this.state.bio}
+                />
+                
+
+                <TouchableOpacity style={styles.button} onPress={() => this.register(this.state.mail, this.state.contrasena,this.state.usuario, this.state.bio)}>
                     <Text style={styles.button}>Registrarse</Text>
                 </TouchableOpacity>
 

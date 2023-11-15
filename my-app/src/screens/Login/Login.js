@@ -31,14 +31,14 @@ class Login extends Component {
                 <TextInput
                     style = {styles.text}
                     onChangeText={(text)=>this.setState({mail:text})}
-                    placeholder='mail'
+                    placeholder='Mail'
                     keyboardType='tu mail'
                     value={this.state.mail}
                     />
                 <TextInput
                     style = {styles.text}
                     onChangeText={(text)=>this.setState({contrasena:text})}
-                    placeholder='contrasena'
+                    placeholder='Password'
                     keyboardType='tu contrasena'
                     value={this.state.contrasena}
                     />
@@ -48,10 +48,6 @@ class Login extends Component {
 
                 <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Register')}>
                     <Text style={styles.button}>Crear un usuario</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Home')}>
-                    <Text style={styles.button}>Home</Text>
                 </TouchableOpacity>
 
             </View>

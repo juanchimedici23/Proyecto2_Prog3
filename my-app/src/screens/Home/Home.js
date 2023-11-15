@@ -28,6 +28,8 @@ class Home extends Component {
                 <TouchableOpacity onPressOut={()=>this.logout()}>
                     <Text> Logout </Text>
                 </TouchableOpacity>
+
+                
             </View>
         )
     }
