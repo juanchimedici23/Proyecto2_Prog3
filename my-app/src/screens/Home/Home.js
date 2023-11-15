@@ -14,7 +14,6 @@ class Home extends Component {
     logout(){
         auth.signOut();
         this.props.navigation.navigate('Login')
-
     }
 
     render(){

@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { auth } from './src/firebase/config';
 import Home from './src/screens/Home/Home'
+import Perfil from './src/screens/Perfil/Perfil';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -23,6 +24,7 @@ export default function App() {
         <Stack.Screen name='Login' component={Login} options={{headerShown: false}}/>
         <Stack.Screen name='Register' component={Register} options={{headerShown: false}}/>
         <Stack.Screen name='Home' component={Home} options={{headerShown: false}}/>
+        <Stack.Screen name='Perfil' component={Perfil} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
     
