@@ -15,10 +15,13 @@ class FormularioPost extends Component {
             db.collection('posteos').add({
                 autor: autor,
                 descripcionPost: descripcionPost,
+                createdAt: createdAt,
             })
             .then( res => console.log(res))
             .catch (error=> console.log(error))
         }
+
+        
 
         render(){
             return(
@@ -30,9 +33,7 @@ class FormularioPost extends Component {
                     placeholder='Escribite algo ...'
                     keyboardType='default'
                     value={this.state.descripcionPost}/>
-                <TouchableOpacity style={style.button} onPress={()=>this.creacionPost(auth.currentUser.email, this.state.descripcionPost, Date.now())}>
-                    <Text style={style.textButton}>Post</Text>    
-                </TouchableOpacity>
+                 
                 </View>
             )
         }
