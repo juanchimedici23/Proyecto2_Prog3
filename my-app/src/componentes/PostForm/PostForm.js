@@ -36,7 +36,7 @@ class FormularioPost extends Component {
                     keyboardType='default'
                     value={this.state.descripcionPost} />
 
-                <TouchableOpacity style= {style.button}onPress={() => this.creacionPost(this.state.descripcionPost)}>
+                <TouchableOpacity style= {style.button}onPress={() => this.creacionPost(auth.currentUser.email, this.state.descripcionPost, Date.now())}>
                     <Text> Compartir </Text>
                 </TouchableOpacity>
 

@@ -20,10 +20,13 @@ class Perfil extends Component {
                 info.forEach(info =>
                     this.setState({
                         id: info.id,
-                        info: info.data()
+                        datos: info.data()
                     })
                 )
             })
+        
+        
+        
     }
 
 
