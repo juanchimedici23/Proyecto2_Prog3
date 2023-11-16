@@ -27,7 +27,9 @@ class FormularioPost extends Component {
         render(){
             return(
                 <View style ={style.formContainer}>
+                <TouchableOpacity>
                 <Text>New Post</Text>
+                </TouchableOpacity>
                 <TextInput
                     style={style.input} 
                     onChangeText={(text)=>this.setState({descripcionPost: text})}
