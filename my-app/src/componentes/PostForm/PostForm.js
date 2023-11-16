@@ -16,6 +16,7 @@ class FormularioPost extends Component {
                 autor: autor,
                 descripcionPost: descripcionPost,
                 createdAt: createdAt,
+                likes:[]
             })
             .then( res => console.log(res))
             .catch (error=> console.log(error))
