@@ -45,6 +45,19 @@ class Home extends Component {
                     <TouchableOpacity onPressOut={() => this.logout()}>
                         <Text> Logout </Text>
                     </TouchableOpacity>
+                  
+
+                    {/* <TextInput
+                        //buscador no me funciona no encuentro el error 
+                        style={styles.textInput}
+                        onChangeText={(text) => {this.setState({ textoBuscador: text })}}
+                        placeholder="Buscar usuarios.."
+                        multiline={true}
+                        value={this.state.textoBuscador}
+                    />
+                    <TouchableOpacity onPress={() => this.buscar(this.state.textoBuscador)}>
+                    </TouchableOpacity>
+                </View>  */}
                     
                     <Text>LISTA DE POSTEOS CREADOS: </Text>
                     <FlatList

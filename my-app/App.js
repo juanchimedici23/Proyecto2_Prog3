@@ -8,6 +8,7 @@ import { auth } from './src/firebase/config';
 import Home from './src/screens/Home/Home'
 import Perfil from './src/screens/Perfil/Perfil';
 import Menu from './src/componentes/Menu/Menu';
+import Search from './src/componentes/Search/search';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -27,6 +28,7 @@ export default function App() {
         <Stack.Screen name='Home' component={Home} options={{headerShown: false}}/>
         <Stack.Screen name='Perfil' component={Perfil} options={{headerShown: false}}/>
         <Stack.Screen name='Menu' component={Menu} options={{headerShown: false}}/>
+        <Stack.Screen name='Search' component={Search} options={{headerShown: false}}/>       
       </Stack.Navigator>
     </NavigationContainer>
     
