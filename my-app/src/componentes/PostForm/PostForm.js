@@ -1,6 +1,7 @@
 import react, { Component } from "react";
 import { db, auth } from '../../firebase/config';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import MyCamera from "../Camara/Camara";
 
 class FormularioPost extends Component {
     constructor() {
@@ -11,23 +12,30 @@ class FormularioPost extends Component {
         }
     }
 
-    creacionPost(autor, descripcionPost, createdAt) {
+    creacionPost(autor, descripcionPost, createdAt, url) {
         db.collection('posteos').add({
             autor: autor,
             descripcionPost: descripcionPost,
             createdAt: createdAt,
-            likes: []
+            likes: [],
+            url: url
         })
             .then(res => console.log(res))
             .catch(error => console.log(error))
     }
 
-
+    urlDeLaFoto (url) { 
+        this.setState({
+            url:url
+        })
+        }
+    
 
     render() {
         return (
             <View style={style.formContainer}>
                 <Text>New Post</Text>
+                <MyCamera urlDeLaFoto = {url => this.urlDeLaFoto(url)}/>
                 <TextInput
 
                     style={style.input}
@@ -36,7 +44,7 @@ class FormularioPost extends Component {
                     keyboardType='default'
                     value={this.state.descripcionPost} />
 
-                <TouchableOpacity style= {style.button}onPress={() => this.creacionPost(auth.currentUser.email, this.state.descripcionPost, Date.now())}>
+                <TouchableOpacity style= {style.button}onPress={() => this.creacionPost(auth.currentUser.email, this.state.descripcionPost, Date.now(), this.state.url)}>
                     <Text> Compartir </Text>
                 </TouchableOpacity>
 
@@ -80,4 +88,6 @@ const style = StyleSheet.create({
     }
 
 })
+
+
 export default FormularioPost
