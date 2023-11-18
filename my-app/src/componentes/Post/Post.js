@@ -68,9 +68,9 @@ class Post extends Component{
 
                 }
 
-                <TouchableOpacity style={style.button} onPress={()=> this.comentar()}>
+                {/* <TouchableOpacity style={style.button} onPress={()=> this.comentar()}>
                 <Text style={style.textButton}> Comentar </Text>    
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 
             </View>
         )
