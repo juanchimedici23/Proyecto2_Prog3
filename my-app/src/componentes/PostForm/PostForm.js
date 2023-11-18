@@ -20,8 +20,13 @@ class FormularioPost extends Component {
             likes: [],
             url: url
         })
-            .then(res => console.log(res))
-            .catch(error => console.log(error))
+        .then( res => {
+            this.setState({
+                descripcionPost:'',
+            })
+
+        }) 
+        .catch( error => console.log(error))
     }
 
     urlDeLaFoto (url) { 

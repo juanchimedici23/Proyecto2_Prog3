@@ -7,7 +7,7 @@ class MyCamera extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            permisoDeHardware: false,
+            permisosDeHardware: false,
             urlInternaFoto: '',
             mostrarLaCamara: true, //esto nos sirve para saber si mostramos la camara o si mostramos la preview de la foto
             fotoUrl: ''
@@ -30,7 +30,7 @@ class MyCamera extends Component {
     }
 
     sacarFoto() {
-        this.metedosDeCamara.takePictureAsync() //Este metodo va a sacar la foto, guardar la URL en el estado y esconder la camara para mostrarle al usuario lo que saco
+        this.metodosDeCamera.takePictureAsync() //Este metodo va a sacar la foto, guardar la URL en el estado y esconder la camara para mostrarle al usuario lo que saco
             .then(photo => {
                 this.setState({
                     urlInternaFoto: photo.uri,
@@ -86,7 +86,7 @@ class MyCamera extends Component {
                                 style={ styles.cameraBody}
                             />
                             <View style={styles.confirm}>
-                                <TouchableOpacity style={styles.cancelButton} onPress={()=>this.cancelar()}>
+                                <TouchableOpacity style={styles.cancelButton} onPress={()=>this.cancelarStorage()}>
                                     <Text style={styles.textButton}>Cancelar</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.confirmButton} onPress={()=>this.guardarLaFotoEnStorage()}>
@@ -100,7 +100,7 @@ class MyCamera extends Component {
                             <Camera
                                 style = { styles.cameraBody }
                                 type={ Camera.Constants.Type.front}
-                                ref={ metedosDeCamara => this.metedosDeCamara = metedosDeCamara}
+                                ref={ metodosDeCamera => this.metodosDeCamera = metodosDeCamera}
                             />
                             <TouchableOpacity style = { styles.button } onPress={()=>this.sacarFoto()}>
                                 <Text style = { styles.textButton }>Sacar Foto</Text>
@@ -129,6 +129,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 10,
         height: "40vh",
+        widht: '40%',
+        height: '400%',
     },
     button: {
         backgroundColor: '#28a745',
@@ -161,6 +163,11 @@ const styles = StyleSheet.create({
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius: 4,
+    },
+    cameraBody: {
+        marginTop: 20,
+        marginBottom: 10,
+        height:"40vh",
     }
 
 })
