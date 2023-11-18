@@ -6,9 +6,11 @@ class Login extends Component {
     constructor(){
         super()
         this.state = {
+            log: false,
             mail: '',
             usuario: '',
             contrasena: '',
+            errorSesion:''
         }
     }
     componentDidMount(){
@@ -16,17 +18,37 @@ class Login extends Component {
             if(user){
                 this.props.navigation.navigate('Menu')
             } 
+            this.setState({log: true})
         })
     }
     login(mail, pass){
         auth.signInWithEmailAndPassword(mail, pass)
         .then(()=>{console.log('Te logueaste con exito');})
-        .catch(error => {console.log(error)})
+        .catch(e => {
+            if (e.code == 'auth/internal-error') {
+                this.setState({
+                    errorSesion: "La contraseña es incorrecta"
+                })
+            }
+            if  (e.code =='auth/invalid-email') {
+                this.setState({
+                    errorSesion: 'El email ingresado no es valido'
+                })
+            }  
+    
+            else {
+                this.setState({
+                    errorSesion:'El email ingresdo no es correcto'
+                })
+            }
+            console.log(e)
+        })
     }
 
     render(){
         return(
             <View style={styles.login}>
+                
                 <Text>Login</Text>
                 <TextInput
                     style = {styles.text}
@@ -42,6 +64,7 @@ class Login extends Component {
                     keyboardType='tu contrasena'
                     value={this.state.contrasena}
                     />
+                
                 <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.mail, this.state.contrasena)}>
                     <Text style={styles.button}>Loguearse</Text>
                 </TouchableOpacity>

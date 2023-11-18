@@ -14,7 +14,7 @@ function Menu() {
         <tab.Navigator>
             <tab.Screen name= 'Home'component= {Home}/>
             <tab.Screen name= 'Perfil' component= {Perfil}/>
-            <tab.Screen name= 'FormularioPost' component= {FormularioPost}/>
+            <tab.Screen name= 'Subila' component= {FormularioPost}/>
         </tab.Navigator>   
         )
 }
