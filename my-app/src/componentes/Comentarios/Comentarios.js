@@ -1,5 +1,5 @@
 import react, {Component} from 'react';
-import {View, TextInput, Text, TouchableOpacity, FlatList} from 'react-native';
+import {View, TextInput, Text, TouchableOpacity, FlatList, StyleSheet} from 'react-native';
 import {db, auth} from '../../firebase/config'
 import firebase from 'firebase';
 
@@ -37,7 +37,7 @@ class Comentarios extends Component {
 
     render(){
         return(
-            <View>
+            <View style={style.container}>
                 {this.state.data.comentarios && this.state.data.comentarios.length > 0 ? (
                     <View>
                         <FlatList
@@ -55,7 +55,7 @@ class Comentarios extends Component {
                     <Text>Por el momento no hay comentarios</Text>
                 )
                 }
-                <View>
+                <View style={style.input}>
                     <TextInput
                     onChangeText = {text => this.setState({comentario: text})}
                     keyboardType = 'predeterminado'
@@ -63,7 +63,7 @@ class Comentarios extends Component {
                     value = {this.state.comentario}/>
 
                     <TouchableOpacity onPress={()=> this.agregarComentario(this.state.id, this.state.comentario)}>
-                        <Text>Agregar comentario</Text>
+                        <Text style={style.button}>Agregar comentario</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -72,5 +72,42 @@ class Comentarios extends Component {
 
 
 }
+
+const style = StyleSheet.create({
+    container:{
+        paddingHorizontal:10,
+        marginTop: 20,
+        marginBottom: 40,
+        marginHorizontal:30,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderRadius: 6,
+    },
+    input:{
+        height:20,
+        paddingVertical:15,
+        paddingHorizontal: 10,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        marginVertical:10,
+    },
+    button:{
+        backgroundColor:'blue',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4, 
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderColor: 'blue'
+    },
+    textButton:{
+        color: '#fff'
+    }
+
+}) 
 
 export default Comentarios
