@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {  db } from '../../firebase/config';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, useAnimatedValue } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, useAnimatedValue, FlatList } from 'react-native';
 
 class Search extends Component {
     constructor(props) {
@@ -34,60 +34,56 @@ class Search extends Component {
     buscar(texto) {
       
       const busquedaTexto = texto.toLowerCase();
-      console.log(busquedaTexto);
+      // console.log(busquedaTexto);
 
       const results = this.state.usuarios.filter((user) => 
           user.data.username.toLowerCase().includes(busquedaTexto)
       );
       this.setState({resultados: results})
-
-      if (resultados.length === 0) {
-          this.setState({
-              resultados: [],
-              textoAMostrar: 'Perdon pero lo buscado no coincide con nada',
-          });
-      } else {
-          this.setState({
-              resultados: resultados,
-              textoAMostrar: '',
-          });
-      }
-      }
+      console.log(results)
+    }
     
 
     render() {
+      console.log(this.state.resultados)
         return (
-            <View style={styles.container}>
-                <TextInput style={styles.input}
-                    onChangeText = {(text) => this.setState({ textoABuscar: text })}
-                    placeholder = 'Busca mail '
-                    multiline = {true}
-                    value = {this.state.textoABuscar}
-                />
-                <TouchableOpacity style={''} onPress={() => this.buscar(this.state.textoABuscar)}>
-                    <Text style={styles.button}>Buscar</Text>
-                </TouchableOpacity>
-                {this.state.resultados===0?(
-                  <Text>No se encontraron resultados</Text>
-                ):(
-                  <FlatList
-                  data={this.state.usersFiltradoMail}
-                  keyExtractor={(item) => item.id.toString()}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity
-                      onPress={() => this.props.navigation.navigate('Profile', { email: item.data.owner })}
-                    >
-                      <View style={styles.view}>
-                        <Text style={styles.nombre}>Usuario:</Text>
-                        <Text style={styles.users}>{item.data.username}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  )}
-                />
-                )
-                }
-
-            </View>
+          <View style={styles.container}>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => this.setState({ textoABuscar: text })}
+            placeholder='Busca mail'
+            multiline={true}
+            value={this.state.textoABuscar}
+          />
+          {this.state.textoABuscar.length !== 0 ? (
+            
+            <TouchableOpacity style={''} onPress={() => this.buscar(this.state.textoABuscar)}>
+              <Text style={styles.button}>Buscar</Text>
+            </TouchableOpacity>
+          ) : (
+            <Text>Ingrese un texto</Text>
+          )}
+          {this.state.resultados.length === 0 ? (
+            <Text>No se encontraron resultados</Text>
+          ) : (
+            <React.Fragment>
+              <FlatList
+                data={this.state.resultados}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('Profile', { username: item.data.username })}
+                  >
+                    <View style={styles.view}>
+                      <Text style={styles.users}>{item.data.username}</Text>
+                    </View>
+                  </TouchableOpacity>
+                )}
+              />
+            </React.Fragment>
+          )}
+        </View>
+        
         )
     }
 }
