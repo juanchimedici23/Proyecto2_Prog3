@@ -65,7 +65,7 @@ class Register extends Component {
                 <TextInput
                     style={styles.text}
                     onChangeText={(text) => this.setState({ usuario: text })}
-                    placeholder='User'
+                    placeholder='User(obligatorio)'
                     keyboardType='tu usuario'
                     value={this.state.usuario}
                 />
@@ -83,7 +83,7 @@ class Register extends Component {
                     keyboardType='tu bio'
                     value={this.state.bio}
                 />
-                {this.state.mail.length>0 && this.state.contrasena.length>0 ?
+                {this.state.mail.length>0 && this.state.contrasena.length>0 && this.state.usuario.length>0 ?
                 (<TouchableOpacity style={styles.button} onPress={() => this.register(this.state.mail, this.state.contrasena,this.state.usuario, this.state.bio)}>
                     <Text style={styles.button}>Registrarse</Text>
                 </TouchableOpacity>):(

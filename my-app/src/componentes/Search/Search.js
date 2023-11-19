@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import {  db } from '../../firebase/config';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, useAnimatedValue } from 'react-native';
 
 class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
             textoABuscar: '',
-            usuarios: [],
+            usuariosTexto: [],
+            usuarioMail:[],
             cargando: true,
             resultados: [],
-            textoAMostrar: ''
+            textoAMostrar: '',
         }
     }
    
@@ -30,13 +31,15 @@ class Search extends Component {
         });
       }
 
-    buscar() {
-      console.log(this.state.textoABuscar)
-      const busquedaTexto = this.state.textoABuscar.toLowerCase();
+    buscar(texto) {
+      
+      const busquedaTexto = texto.toLowerCase();
+      console.log(busquedaTexto);
 
-      const resultados = this.state.usuarios.filter((user) => 
-          user.data.usuario.toLowerCase().includes(busquedaTexto)
+      const results = this.state.usuarios.filter((user) => 
+          user.data.username.toLowerCase().includes(busquedaTexto)
       );
+      this.setState({resultados: results})
 
       if (resultados.length === 0) {
           this.setState({
@@ -57,13 +60,33 @@ class Search extends Component {
             <View style={styles.container}>
                 <TextInput style={styles.input}
                     onChangeText = {(text) => this.setState({ textoABuscar: text })}
-                    placeholder = 'Buscar'
+                    placeholder = 'Busca mail '
                     multiline = {true}
                     value = {this.state.textoABuscar}
                 />
                 <TouchableOpacity style={''} onPress={() => this.buscar(this.state.textoABuscar)}>
                     <Text style={styles.button}>Buscar</Text>
                 </TouchableOpacity>
+                {this.state.resultados===0?(
+                  <Text>No se encontraron resultados</Text>
+                ):(
+                  <FlatList
+                  data={this.state.usersFiltradoMail}
+                  keyExtractor={(item) => item.id.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      onPress={() => this.props.navigation.navigate('Profile', { email: item.data.owner })}
+                    >
+                      <View style={styles.view}>
+                        <Text style={styles.nombre}>Usuario:</Text>
+                        <Text style={styles.users}>{item.data.username}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                )
+                }
+
             </View>
         )
     }

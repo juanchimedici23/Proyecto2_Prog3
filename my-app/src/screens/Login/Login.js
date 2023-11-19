@@ -78,7 +78,7 @@ class Login extends Component {
                 </TouchableOpacity>
               </>
             ) : (
-              <ActivityIndicator size='medium' color='red' />
+              <ActivityIndicator size='small' color='blue' />
             )}
           </View>
         );
