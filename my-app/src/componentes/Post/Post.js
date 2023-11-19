@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { db,auth } from '../../firebase/config';
 import firebase from 'firebase';
-
+import MyCamera from '../Camara/Camara';
 class Post extends Component{
 
     constructor(props){
@@ -49,7 +49,7 @@ class Post extends Component{
 
     render(){
         return(
-            <View>
+            <View style= {style.postContainer}>
                 <Text>Posteo de :{this.props.dataPost.datos.autor}</Text>
                 <Text>{this.props.dataPost.datos.descripcionPost}</Text>
                 <Text> { this.state.cantidad_likes }</Text>
@@ -68,8 +68,7 @@ class Post extends Component{
 
                 }
 
-                    <TouchableOpacity style={style.button} onPress={() => this.props.navigation.navigate(
-                        'Comentarios', { id: this.props.dataPost.id })}>
+                    <TouchableOpacity style={style.button} onPress={() => this.props.navigation.navigate('Comentarios', { id: this.props.dataPost.id })}>
                     </TouchableOpacity>
                 
             </View>
@@ -78,6 +77,13 @@ class Post extends Component{
 }
 
 const style = StyleSheet.create({
+    postContainer: {
+        marginBottom: 10, // Puedes ajustar este valor para controlar el espacio entre cada posteo
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderRadius: 6,
+        padding: 10,
+      },
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,

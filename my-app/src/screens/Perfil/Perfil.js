@@ -24,17 +24,25 @@ class Perfil extends Component {
                     })
                 )
             })
-        
-        
-        
-    }
 
+
+
+    }
+    logout() {
+        auth.signOut();
+        this.props.navigation.navigate('Login');
+    }
 
 
     render() {
         return (
 
             <View>
+                <React.Fragment>
+                    <TouchableOpacity onPressOut={() => this.logout()}>
+                        <Text> Logout </Text>
+                    </TouchableOpacity>
+                </React.Fragment>
                 <Text> Bienvendio a tu Perfil! </Text>
                 <Text> Biografía del usuario: {this.state.info.bio}</Text>
                 <Text> Tu email: {auth.currentUser.email}</Text>
