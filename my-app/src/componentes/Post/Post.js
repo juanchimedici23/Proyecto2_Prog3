@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { db,auth } from '../../firebase/config';
 import firebase from 'firebase';
 import MyCamera from '../Camara/Camara';
@@ -55,6 +55,11 @@ class Post extends Component{
         return(
             <View style= {style.postContainer}>
                 <Text>Posteo de :{this.props.dataPost.datos.autor}</Text>
+                <Image
+                source={{ uri: this.props.dataPost.datos.url }}
+                resizeMode="cover"
+                style={style.fotoPosteo}
+                />
                 <Text>{this.props.dataPost.datos.descripcionPost}</Text>
                 <Text> { this.state.cantidad_likes }</Text>
                 {
@@ -129,6 +134,12 @@ const style = StyleSheet.create({
     },
     textButton:{
         color: '#fff'
+    },
+    fotoPosteo: {
+        marginTop: 20,
+        marginBottom: 10,
+        height:300,
+        width:"100%"
     }
 
 }) 
