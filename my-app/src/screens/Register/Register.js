@@ -10,7 +10,7 @@ class Register extends Component {
             usuario: '',
             contrasena: '',
             bio: '',
-            foto_perfil: '',
+            fotoPerfil: '',
             errorRegistro: '',
         }
     }
@@ -22,17 +22,21 @@ class Register extends Component {
             }
         })
     }
-    register(mail, pass, userName, biografia) {
-        auth.createUserWithEmailAndPassword(mail, pass)
+    register(mail, pass, userName, biografia, fotoPerfil) {
+        
+        if (mail && pass && userName ) {
+            auth.createUserWithEmailAndPassword(mail, pass)
             .then(res => {
                 console.log('Correctamente registrado', res);
 
                 db.collection('users').add({
                     mail: auth.currentUser.email,
                     username:userName,
-                    bio:biografia,
+                    bio:biografia || '',
+                    fotoPerfil: fotoPerfil || '',
                     createdAt: Date.now(),
                 })
+                this.props.navigation.navigate('Login')
                 .catch((e) => {
                         if (e.code=='auth/invalid-email') {
                             this.setState({
@@ -44,37 +48,37 @@ class Register extends Component {
                                 errorRegistro: 'La contraseña debe tener al menos 6 caracteres'
                             })
                         }
-                  
-
+        })
                    
                 });
-            })
+            } else {this.setState({
+                errorRegistro: 'Completa los campos obligatorios'
+            })}
     }
     
     render() {
         return (
             <View style={styles.register}>
                 <Text>Register</Text>
-
                 {this.state.errorRegistro ? <Text style={styles.errores}>{this.state.errorRegistro}</Text> : null}
                 <TextInput
                     style={styles.text}
                     onChangeText={(text) => this.setState({ mail: text })}
-                    placeholder='Mail(obligatorio)'
+                    placeholder='Mail (obligatorio)'
                     keyboardType='tu mail'
                     value={this.state.mail}
                 />
                 <TextInput
                     style={styles.text}
                     onChangeText={(text) => this.setState({ usuario: text })}
-                    placeholder='User(obligatorio)'
+                    placeholder='User (obligatorio)'
                     keyboardType='tu usuario'
                     value={this.state.usuario}
                 />
                 <TextInput
                     style={styles.text}
                     onChangeText={(text) => this.setState({ contrasena: text })}
-                    placeholder='Password(obligatorio)'
+                    placeholder='Password (obligatorio)'
                     keyboardType='tu contrasena'
                     value={this.state.contrasena}
                 />
@@ -85,17 +89,14 @@ class Register extends Component {
                     keyboardType='tu bio'
                     value={this.state.bio}
                 />
-                {this.state.mail.length>0 && this.state.contrasena.length>0 && this.state.usuario.length>0 ?
-                (<TouchableOpacity style={styles.button} onPress={() => this.register(this.state.mail, this.state.contrasena,this.state.usuario, this.state.bio)}>
+                <TouchableOpacity style={styles.button} onPress={() => this.register(this.state.mail, this.state.contrasena,this.state.usuario, this.state.bio, this.state.fotoPerfil)} disabled={!this.state.mail || !this.state.contrasena || !this.state.usuario}>
                     <Text style={styles.button}>Registrarse</Text>
                 </TouchableOpacity>
-            
-                ):(
-                    <TouchableOpacity style={styles.button}>
+                    {/* <TouchableOpacity style={styles.button} onPress={() => this.setState({ errorRegistro: "Los campos obligatorios no pueden quedar vacíos" })}>
                     <Text style={styles.button} >Registro</Text>
-                  </TouchableOpacity>
-                )}
+                  </TouchableOpacity> */}
                 
+                {/* {this.state.errorRegistro.length > 0 ? <View><Text style= {styles.errores}>{this.state.errorRegistro}</Text></View> : null} */}
 
 
                 <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Login')}>
