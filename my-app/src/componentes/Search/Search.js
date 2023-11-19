@@ -9,6 +9,8 @@ class Search extends Component {
             textoABuscar: '',
             usuarios: [],
             cargando: true,
+            resultados: [],
+            textoAMostrar: ''
         }
     }
    
@@ -29,14 +31,24 @@ class Search extends Component {
       }
 
     buscar() {
-        const usuariosfiltrados = this.state.usuarios.filter(user =>
-          user.data.email.includes(this.state.textoABuscar.toLowerCase())
-        );
-        console.log('Usuarios filtrados: ', usuariosfiltrados);
-    
-        this.props.navigation.navigate('ScreenResultados', {
-          usuarios: usuariosfiltrados,
-        });
+      console.log(this.state.textoABuscar)
+      const busquedaTexto = this.state.textoABuscar.toLowerCase();
+
+      const resultados = this.state.usuarios.filter((user) => 
+          user.data.usuario.toLowerCase().includes(busquedaTexto)
+      );
+
+      if (resultados.length === 0) {
+          this.setState({
+              resultados: [],
+              textoAMostrar: 'Perdon pero lo buscado no coincide con nada',
+          });
+      } else {
+          this.setState({
+              resultados: resultados,
+              textoAMostrar: '',
+          });
+      }
       }
     
 

@@ -41,6 +41,7 @@ class MyCamera extends Component {
     }
 
     guardarLaFotoEnStorage() {
+        console.log('Aceptando la foto...')
         fetch(this.state.urlInternaFoto)
             .then(res => res.blob()) //es el metodo para recuperar binarios. Seria JSON para fotos y lo guardo en el segundo then con el parametro image
             .then(image => {
