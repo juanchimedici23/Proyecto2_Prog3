@@ -7,7 +7,6 @@ class Post extends Component{
 
     constructor(props){
         super(props);
-        
         this.state={
             like: false,
             cantidad_likes: this.props.dataPost.datos.likes.length
@@ -47,6 +46,11 @@ class Post extends Component{
         .catch(e => console.log(e))
     }
 
+    borrado(){
+        db.collection('posteos').doc(this.props.dataPost.id).delete();
+        console.log('Se borro el posteo con exito');
+    }
+
     render(){
         return(
             <View style= {style.postContainer}>
@@ -71,6 +75,14 @@ class Post extends Component{
                     <TouchableOpacity style={style.button} onPress={() => this.props.navigation.navigate('Comentarios', { id: this.props.dataPost.id })}>
                         <Text>Comentar</Text>                   
                     </TouchableOpacity>
+                
+                {this.props.dataPost.datos.autor == auth.currentUser.email?(
+                    <TouchableOpacity onPress={()=>this.borrado()}>
+                        <Text>Borrar este posteo</Text>
+                    </TouchableOpacity>
+                ):
+                null
+                }
                 
             </View>
         )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, View, Text, FlatList } from 'react-native'
+import { TouchableOpacity, Text, View, StyleSheet, FlatList } from 'react-native';
 import { auth, db } from '../../firebase/config'
 import Post from '../../componentes/Post/Post'
 
@@ -33,7 +33,7 @@ class Perfil extends Component {
             infos.forEach(info => {
                 posteosUsuario.push({
                     id: info.id,
-                    data: info.data()
+                    datos: info.data()
                 })
             })
             this.setState({
@@ -56,7 +56,7 @@ class Perfil extends Component {
 
             <View>
                 <React.Fragment>
-                    <TouchableOpacity onPressOut={() => this.logout()}>
+                    <TouchableOpacity  style ={styles.errores} onPressOut={() => this.logout()}>
                         <Text> Logout </Text>
                     </TouchableOpacity>
                 </React.Fragment>
@@ -64,11 +64,12 @@ class Perfil extends Component {
                 <Text> Biografía del usuario: {this.state.info.bio}</Text>
                 <Text> Tu email: {auth.currentUser.email}</Text>
                 <Text> Tu perfil se creó: {auth.currentUser.metadata.creationTime}</Text>
+                <Text>Cantidad de posteos: {this.state.posts.length }</Text>
 
                 <FlatList
                 data={this.state.posts}
                 keyExtractor={(posteo=>posteo.id)}
-                renderItem={({post})=><Post datapost={post} navigation = {this.props.navigation}/>}
+                renderItem={({item})=><Post navigation = {this.props.navigation} dataPost={item} />}
                 />
 
 
@@ -77,5 +78,43 @@ class Perfil extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    login:{
+        paddingHorizontal:10,
+        marginTop: 20,
+    },
+    text:{
+        height:20,
+        paddingVertical:16,
+        paddingHorizontal: 12,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 5,
+        marginVertical:15,
+    },
+    button:{
+        backgroundColor:'#28a745',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:5, 
+        borderWidth:2,
+        borderStyle: 'solid',
+        borderColor: '#28a745',
+    },
+    errores:{
+        backgroundColor:'rgba(255, 0, 0, 0.1)',
+        paddingHorizontal : 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:5, 
+        borderWidth:2,
+        borderStyle: 'solid',
+    }
+ 
+})
+
 
 export default Perfil; 
