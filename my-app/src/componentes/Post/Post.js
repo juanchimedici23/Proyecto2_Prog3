@@ -54,7 +54,9 @@ class Post extends Component{
     render(){
         return(
             <View style= {style.postContainer}>
-                <Text>Posteo de :{this.props.dataPost.datos.autor}</Text>
+                <TouchableOpacity onPress={()=> this.props.navigate('PerfilOtros',{infoUsuario: this.props.dataPost.datos.autor,navigation: this.props.navigation})}>
+                    <Text>Posteo de :{this.props.dataPost.datos.autor}</Text>
+                </TouchableOpacity>
                 <Image
                 source={{ uri: this.props.dataPost.datos.url }}
                 resizeMode="cover"

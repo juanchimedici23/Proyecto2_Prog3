@@ -55,6 +55,8 @@ class Register extends Component {
         return (
             <View style={styles.register}>
                 <Text>Register</Text>
+
+                {this.state.errorRegistro ? <Text style={styles.errores}>{this.state.errorRegistro}</Text> : null}
                 <TextInput
                     style={styles.text}
                     onChangeText={(text) => this.setState({ mail: text })}
@@ -86,12 +88,14 @@ class Register extends Component {
                 {this.state.mail.length>0 && this.state.contrasena.length>0 && this.state.usuario.length>0 ?
                 (<TouchableOpacity style={styles.button} onPress={() => this.register(this.state.mail, this.state.contrasena,this.state.usuario, this.state.bio)}>
                     <Text style={styles.button}>Registrarse</Text>
-                </TouchableOpacity>):(
-                    <TouchableOpacity style={styles.button} onPress={() => this.setState({ errorRegistro: "Los campos obligatorios no pueden quedar vacíos" })}>
+                </TouchableOpacity>
+            
+                ):(
+                    <TouchableOpacity style={styles.button}>
                     <Text style={styles.button} >Registro</Text>
                   </TouchableOpacity>
                 )}
-                {this.state.errorRegistro.length > 0 ? <View><Text style= {styles.errores}>{this.state.errorRegistro}</Text></View> : null}
+                
 
 
                 <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Login')}>

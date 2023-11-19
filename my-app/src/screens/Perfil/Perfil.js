@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, Text, View, StyleSheet, FlatList } from 'react-native';
+import { TouchableOpacity, Text, View, StyleSheet, FlatList,ScrollView } from 'react-native';
 import { auth, db } from '../../firebase/config'
 import Post from '../../componentes/Post/Post'
 
@@ -53,7 +53,7 @@ class Perfil extends Component {
 
     render() {
         return (
-
+            <ScrollView style={{ flex: 1 }}>
             <View>
                 <React.Fragment>
                     <TouchableOpacity  style ={styles.errores} onPressOut={() => this.logout()}>
@@ -74,6 +74,7 @@ class Perfil extends Component {
 
 
             </View>
+            </ScrollView>
 
         )
     }
