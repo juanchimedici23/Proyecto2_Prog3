@@ -7,7 +7,7 @@ class Post extends Component{
 
     constructor(props){
         super(props);
-
+        
         this.state={
             like: false,
             cantidad_likes: this.props.dataPost.datos.likes.length
@@ -69,6 +69,7 @@ class Post extends Component{
                 }
 
                     <TouchableOpacity style={style.button} onPress={() => this.props.navigation.navigate('Comentarios', { id: this.props.dataPost.id })}>
+                        <Text>Comentar</Text>                   
                     </TouchableOpacity>
                 
             </View>
