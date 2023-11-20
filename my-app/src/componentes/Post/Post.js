@@ -11,6 +11,7 @@ class Post extends Component{
         this.state={
             like: false,
             cantidad_likes: this.props.dataPost.datos.likes.length,
+            // cantidad_comentarios: this.props.dataPost.datos.comentarios.length,
            
         }   
 
@@ -76,13 +77,15 @@ class Post extends Component{
                 style={style.image}
                 />
                 <Text>{this.props.dataPost.datos.descripcionPost}</Text>
-                <Text style = {style.cantidadLikes}> { this.state.cantidad_likes }</Text>
+                <Text style = {style.cantidadLikes}> Hay { this.state.cantidad_likes } like/s</Text>
+                {/* <Text style = {style.cantidadLikes}> Hay { this.state.cantidad_comentarios } comentario/s</Text> */}
                 {
                     this.state.like ? 
 
                     <TouchableOpacity  onPress={()=>this.UnlikearPost()}>
                         <FontAwesome name='heart' color='red' size={30} />    
                     </TouchableOpacity>
+                    
 
                     :
 
