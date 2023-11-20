@@ -2,15 +2,19 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { db,auth } from '../../firebase/config';
 import firebase from 'firebase';
-import MyCamera from '../Camara/Camara';
+
 class Post extends Component{
 
     constructor(props){
         super(props);
+        console.log(this.props.dataPost.datos.comentarios.length)
         this.state={
             like: false,
             cantidad_likes: this.props.dataPost.datos.likes.length,
+            cantComentarios: props.dataPost.datos.comentarios.length
+           
         }
+        console.log(this.state)
     }
 
     componentDidMount(){
@@ -19,7 +23,6 @@ class Post extends Component{
                 like:true
             })
         }
-        console.log(this.props.dataPost.datos.comentarios)
 
     }
 
@@ -59,9 +62,14 @@ class Post extends Component{
     render(){
         return(
             <View style= {style.postContainer}>
-                <TouchableOpacity /*onPress={()=> this.props.navigate('PerfilOtros',{infoUsuario: this.props.dataPost.datos.autor,navigation: this.props.navigation})}*/>
+                {this.props.dataPost.datos.autor !== auth.currentUser.email?(
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('PerfilOtros', {mailUsuario: this.props.dataPost.datos.autor})}>
                     <Text>Posteo de :{this.props.dataPost.datos.autor}</Text>
-                </TouchableOpacity>
+                    </TouchableOpacity>
+                ):( <TouchableOpacity onPress={()=>this.props.navigation.navigate('Perfil', {mailUsuario: this.props.dataPost.datos.autor})}>
+                    <Text>Posteo de :{this.props.dataPost.datos.autor}</Text>
+                    </TouchableOpacity>)}
+               
                 <Image
                 source={{ uri: this.props.dataPost.datos.url }}
                 resizeMode="cover"
@@ -83,7 +91,7 @@ class Post extends Component{
                 </TouchableOpacity>
 
                 }
-                    {/* <Text>Cantidad de Comentarios: {this.props.dataPost.datos.comentarios.length}  </Text> */}
+                    <Text>Cantidad de comentarios: {this.state.cantComentarios}  </Text>
 
                     <TouchableOpacity style={style.button} onPress={() => this.props.navigation.navigate('Comentarios', { id: this.props.dataPost.id })}>
                         <Text>Comentar</Text>                   

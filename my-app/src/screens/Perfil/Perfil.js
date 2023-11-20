@@ -39,7 +39,7 @@ class Perfil extends Component {
             this.setState({
                 posts: posteosUsuario
             },
-            console.log(posteosUsuario))
+            console.log(this.state.posts))
         })
 
 

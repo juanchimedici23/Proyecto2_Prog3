@@ -9,7 +9,7 @@ class FormularioPost extends Component {
         this.state = {
             descripcionPost: '',
             url: '',
-            comentarios: []
+            
         }
     }
 
