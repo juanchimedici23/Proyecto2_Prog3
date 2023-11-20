@@ -9,16 +9,18 @@ class FormularioPost extends Component {
         this.state = {
             descripcionPost: '',
             url: '',
+            comentarios: []
         }
     }
 
-    creacionPost(autor, descripcionPost, createdAt, url) {
+    creacionPost(autor, descripcionPost, createdAt, url,comentarios) {
         db.collection('posteos').add({
             autor: autor,
             descripcionPost: descripcionPost,
             createdAt: createdAt,
             likes: [],
-            url: url
+            url: url,
+            comentarios:[]
         })
         .then( res => {
             this.setState({
@@ -27,6 +29,8 @@ class FormularioPost extends Component {
 
         }) 
         .catch( error => console.log(error))
+
+        this.props.navigation.navigate('Home')
     }
 
     urlDeLaFoto (url) { 

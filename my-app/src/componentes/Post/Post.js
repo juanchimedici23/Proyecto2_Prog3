@@ -9,7 +9,7 @@ class Post extends Component{
         super(props);
         this.state={
             like: false,
-            cantidad_likes: this.props.dataPost.datos.likes.length
+            cantidad_likes: this.props.dataPost.datos.likes.length,
         }
     }
 
@@ -19,6 +19,8 @@ class Post extends Component{
                 like:true
             })
         }
+        console.log(this.props.dataPost.datos.comentarios)
+
     }
 
     likearPost(){
@@ -51,10 +53,13 @@ class Post extends Component{
         console.log('Se borro el posteo con exito');
     }
 
+    
+
+
     render(){
         return(
             <View style= {style.postContainer}>
-                <TouchableOpacity onPress={()=> this.props.navigate('PerfilOtros',{infoUsuario: this.props.dataPost.datos.autor,navigation: this.props.navigation})}>
+                <TouchableOpacity /*onPress={()=> this.props.navigate('PerfilOtros',{infoUsuario: this.props.dataPost.datos.autor,navigation: this.props.navigation})}*/>
                     <Text>Posteo de :{this.props.dataPost.datos.autor}</Text>
                 </TouchableOpacity>
                 <Image
@@ -78,6 +83,7 @@ class Post extends Component{
                 </TouchableOpacity>
 
                 }
+                    {/* <Text>Cantidad de Comentarios: {this.props.dataPost.datos.comentarios.length}  </Text> */}
 
                     <TouchableOpacity style={style.button} onPress={() => this.props.navigation.navigate('Comentarios', { id: this.props.dataPost.id })}>
                         <Text>Comentar</Text>                   

@@ -29,7 +29,7 @@ class Comentarios extends Component {
         db.collection('posteos')
             .doc(id)
             .update({
-                comentarios: firebase.firestore.FieldValue.arrayUnion({
+                    comentarios: firebase.firestore.FieldValue.arrayUnion({
                     autor: auth.currentUser.email,
                     createdAt: Date.now(),
                     comentario: comentario
