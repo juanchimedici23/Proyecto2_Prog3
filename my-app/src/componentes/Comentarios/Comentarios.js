@@ -74,7 +74,7 @@ class Comentarios extends Component {
 
                 </View>
                 <Text onPress={() => this.props.navigation.navigate('Menu')} style={styles.button}>
-                    Volver a home
+                    Volver al home
                 </Text>
             </View>
             </ScrollView>

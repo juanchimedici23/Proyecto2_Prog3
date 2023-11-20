@@ -48,9 +48,10 @@ class PerfilOtros extends Component{
             <ScrollView>
                 <View>
                     <Text style = {styles.bienvenido}>{this.state.infoUsuario.username}</Text>
+                    <Text style = {styles.bienvenido}>{this.state.infoUsuario.mail}</Text>
+
                     <Text style = {styles.textBlack}>Biografia: {this.state.infoUsuario.bio}</Text>
                     <Text style = {styles.textBlack}>Cantidad de posteos: {this.state.posteosOtrosUsuario.length}</Text>
-                    {/* <Text>this.state.infoUsuario.username}</Text> */}
                 </View>
                 
                 <FlatList 

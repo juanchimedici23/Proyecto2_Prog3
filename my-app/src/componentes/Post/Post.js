@@ -8,14 +8,12 @@ class Post extends Component{
 
     constructor(props){
         super(props);
-        
         this.state={
             like: false,
             cantidad_likes: this.props.dataPost.datos.likes.length,
-            // cantComentarios: props.dataPost.datos.comentarios.length
            
-        }
-        console.log(this.state)
+        }   
+
     }
 
     componentDidMount(){
@@ -24,6 +22,7 @@ class Post extends Component{
                 like:true
             })
         }
+
 
     }
 
@@ -92,7 +91,7 @@ class Post extends Component{
                     </TouchableOpacity>
 
                 }
-                    <Text style = {style.cantidadLikes}>Cantidad de comentarios: {this.state.cantComentarios}  </Text>
+                    
 
                     <TouchableOpacity  onPress={() => this.props.navigation.navigate('Comentarios', { id: this.props.dataPost.id })}>
                     <FontAwesome name="comment-o" size={30} color="#000" />                   
