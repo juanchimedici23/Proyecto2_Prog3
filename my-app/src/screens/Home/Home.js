@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { auth, db } from '../../firebase/config';
-import { TouchableOpacity, Text, View, ScrollView, StyleSheet, FlatList, Image } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, FlatList, Image } from 'react-native';
 import Post from '../../componentes/Post/Post';
+import { auth, db } from '../../firebase/config';
 
 class Home extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             mail: '',
@@ -14,7 +14,7 @@ class Home extends Component {
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         db.collection('posteos').orderBy('createdAt', 'desc').onSnapshot(
             listaPosteos => {
                 let posteosAMostrar = [];
@@ -29,69 +29,47 @@ class Home extends Component {
                     posts: posteosAMostrar
                 });
             }
-        ); 
+        );
     }
 
     renderPost = ({ item }) => (
         <Post navigation={this.props.navigation} dataPost={item} style={styles.postContainer} />
     );
 
-    render(){
-        return(
-            <ScrollView style={{ flex: 1 }}>
-                <View>
-                    <Text style={styles.heading}>LISTA DE POSTEOS CREADOS:</Text>
-                    <FlatList
-                        data={this.state.posts}
-                        keyExtractor={unPosteo => unPosteo.id}
-                        renderItem={this.renderPost}
-                    />
-                </View>
+    render() {
+        return (
+            <ScrollView style={styles.container}>
+                <Text style={styles.heading}>LISTA DE POSTEOS CREADOS:</Text>
+                <FlatList
+                    data={this.state.posts}
+                    keyExtractor={unPosteo => unPosteo.id}
+                    renderItem={this.renderPost}
+                />
             </ScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
     heading: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 10,
+      fontSize: 26,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginTop: 20,
+      marginBottom: 10,
+      color: 'black',
     },
     postContainer: {
-        backgroundColor: '#fff',
-        padding: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccd6dd',
+      backgroundColor: '#FFFFFF',
+      marginBottom: 10,
+      borderWidth: 1,
+      borderColor: '#EAEAEA',
+      borderRadius: 10,
+      padding: 15,
     },
-    postHeader: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 10,
-    },
-    avatar: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        marginRight: 10,
-    },
-    username: {
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
-    postContent: {
-        fontSize: 15,
-        marginBottom: 10,
-    },
-    interactionContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    interactionText: {
-        color: '#657786',
-        marginRight: 15,
-    },
-});
+  });
 
-export default Home; 
+export default Home;

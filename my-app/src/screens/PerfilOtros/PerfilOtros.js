@@ -47,18 +47,18 @@ class PerfilOtros extends Component{
         return (
             <ScrollView>
                 <View>
-                    <Text>{this.state.infoUsuario.username}</Text>
-                    <Text>Biografia:{this.state.infoUsuario.bio}</Text>
-                    <Text>Cantidad de posteos: {this.state.posteosOtrosUsuario.length}</Text>
+                    <Text style = {styles.bienvenido}>{this.state.infoUsuario.username}</Text>
+                    <Text style = {styles.textBlack}>Biografia: {this.state.infoUsuario.bio}</Text>
+                    <Text style = {styles.textBlack}>Cantidad de posteos: {this.state.posteosOtrosUsuario.length}</Text>
                     {/* <Text>this.state.infoUsuario.username}</Text> */}
                 </View>
-                <Text>Posteos</Text>
+                
                 <FlatList 
                 data={this.state.posteosOtrosUsuario}
                 keyExtractor={(item)=>item.id.toString()}
                 renderItem={({item})=> <Post dataPost={item} navigation={this.props.navigation}/>}
                 />
-                <Text onPress={()=> this.props.navigation.navigate('Menu')} style={styles.container}>Volver al home</Text>
+                <Text style = {styles.logout} onPress={()=> this.props.navigation.navigate('Menu')} >Volver al home</Text>
             </ScrollView>
         )
     }
@@ -69,38 +69,49 @@ class PerfilOtros extends Component{
 export default PerfilOtros
 
 const styles = StyleSheet.create({
-    container:{
-      flex: 1,
-      marginTop: 10,
-      marginRight: 10,
-      marginLeft: 10,
+    textBlack: {
+        fontSize: 15,
+        color: 'black',
+        marginTop: 10,
+      }, 
+      logout: {
+        color: '#fff',
+        backgroundColor: '#000',
+        borderColor: '#ccc',
+        padding: 10,
+        borderRadius: 5,
+        width: 70,
     },
-  
-    input:{
-      borderColor: '#ccc',
-      borderWidth: 2,
-      marginBottom: 5,
-      padding: 10,
-      fontSize: 15,
-      borderRadius: 5,
+    bienvenido: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'black',
+        marginTop: 10,
     },
-  
-    button:{
-      textAlign: 'center',
-      backgroundColor: '#0095F6',
-      padding: 5,
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: '#ccc',
-      marginBottom: 5,
-      fontWeight: 'bold',
-      color:'#FFFFFF',
-      fontSize: 17
+    login: {
+        paddingHorizontal: 10,
+        marginTop: 20,
     },
-  
-    textUser:{
-      fontSize: 20,
-      fontWeight: 'bold',
-      marginTop: 5
-    }
-  })
+    text: {
+        height: 20,
+        paddingVertical: 16,
+        paddingHorizontal: 12,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 5,
+        marginVertical: 15,
+    },
+    button: {
+        backgroundColor: '#28a745',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 5,
+        borderWidth: 2,
+        borderStyle: 'solid',
+        borderColor: '#28a745',
+    },
+    
+})
+    

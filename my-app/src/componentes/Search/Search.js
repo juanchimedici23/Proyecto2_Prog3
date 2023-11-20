@@ -64,7 +64,7 @@ class Search extends Component {
             <Text>Ingrese un texto</Text>
           )}
           {this.state.resultados.length === 0 ? (
-            <Text>No se encontraron resultados</Text>
+            <Text style = {styles.noEncontre}>No se encontraron resultados</Text>
           ) : (
             <React.Fragment>
               <FlatList
@@ -101,6 +101,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginLeft: 10,
   },
+  noEncontre: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
+    marginTop: 10,
+},
 
   input:{
     borderColor: '#ccc',

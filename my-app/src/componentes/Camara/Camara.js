@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Camera } from 'expo-camera';
 import { db, storage } from '../../firebase/config'
 import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native'
+import { FontAwesome } from '@expo/vector-icons'
 
 class MyCamera extends Component {
     constructor(props) {
@@ -134,17 +135,16 @@ const styles = StyleSheet.create({
         height: '400%',
     },
     button: {
-        backgroundColor: '#28a745',
+        backgroundColor: 'black',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
     },
     textButton: {
-        color: '#fff',
+        color: 'white',
         textAlign: "center"
     },
     confirm: {
