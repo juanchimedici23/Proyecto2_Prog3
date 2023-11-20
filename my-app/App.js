@@ -15,13 +15,6 @@ import Comentarios from './src/componentes/Comentarios/Comentarios';
 export default function App() {
   const Stack = createNativeStackNavigator();
 
-  //Este array dsps hay que cambiarlo a la api pero x ahora uso este
-  const users = [
-    {name: 'Benjamin', id: 1},
-    {name: 'Toto', id: 2},
-    {name: 'Juanchi', id: 3}
-  ]
-
   return (
     
     <NavigationContainer>

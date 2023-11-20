@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, FlatList, StyleSheet, ScrollView } from 'react-native';
 import { db, auth } from '../../firebase/config';
 import firebase from 'firebase';
 
@@ -15,12 +15,12 @@ class Comentarios extends Component {
 
     componentDidMount() {
         db.collection('posteos')
+            // .orderBy('createdAt', 'asc')
             .doc(this.props.route.params.id)
             .onSnapshot(docs => {
                 this.setState({
                     id: docs.id,
-                    data: docs.data(),
-                    infoComentario: docs.data().infoComentario
+                    infoComentario: docs.data()
                 })
             })
     }
@@ -32,7 +32,7 @@ class Comentarios extends Component {
                 comentarios: firebase.firestore.FieldValue.arrayUnion({
                     autor: auth.currentUser.email,
                     createdAt: Date.now(),
-                    comentario: this.state.comentario
+                    comentario: comentario
                 })
             })
             .catch(e => console.log(e))
@@ -40,15 +40,15 @@ class Comentarios extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                {this.state.infoComentario && this.state.infoComentario.length > 0 ? (
+            <ScrollView>
+                <View style={styles.container}>
+                {this.state.infoComentario.comentarios && this.state.infoComentario.comentarios.length > 0 ? (
                     <FlatList
-                        data={this.state.infoComentario}
+                        data={this.state.infoComentario.comentarios}
                         keyExtractor={item => item.createdAt.toString()}
                         renderItem={({ item }) => (
                             <View>
-                                <Text>{item.autor}</Text>
-                                <Text>{item.comentario}</Text>
+                                <Text>{item.autor} : {item.comentario}</Text>
                             </View>
                         )}
                     />
@@ -64,12 +64,20 @@ class Comentarios extends Component {
                         placeholder='Deja tu comentario'
                         value={this.state.comentario}
                     />
-
+                    {this.state.comentario.length>0 ? (
                     <TouchableOpacity style={styles.button} onPress={() => this.agregarComentario(this.state.id, this.state.comentario)}>
                         <Text>Agregar comentario</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>)
+                    : (<TouchableOpacity>
+                        <Text>No podes publicar un comentario vacio</Text>
+                    </TouchableOpacity>)}
+
                 </View>
+                <Text onPress={() => this.props.navigation.navigate('Menu')} style={styles.button}>
+                    Volver a home
+                </Text>
             </View>
+            </ScrollView>
         )
     }
 }
